@@ -39,7 +39,6 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/SimpleMauiMVVM.csproj'
-    versioningScheme: 'byBuildNumber'
 
 - task: PublishPipelineArtifact@1
   inputs:
