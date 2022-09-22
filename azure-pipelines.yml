@@ -9,6 +9,8 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -38,3 +40,8 @@ steps:
     command: 'pack'
     packagesToPack: '**/SimpleMauiMVVM.csproj'
     versioningScheme: 'byBuildNumber'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
