@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-name: '(BuildDefinitionName)_(Year:yyyy).(Month).(Month).(DayOfMonth)$(Rev:.r)'
+name: '(BuildDefinitionName)_(Year:yyyy).(Month).(DayOfMonth)$(Rev:.r)'
 
 variables:
   solution: '**/SimpleMauiMVVM.csproj'
@@ -17,6 +17,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+  - task: CmdLine@2
+    inputs:
+      script: 'echo $(name)'
+
   - task: DotNetCoreCLI@2
     inputs:
       command: 'build'
