@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+name: '(BuildDefinitionName)_(Year:yyyy).(Month).(Month).(DayOfMonth)$(Rev:.r)'
 
 variables:
   solution: '**/SimpleMauiMVVM.csproj'
