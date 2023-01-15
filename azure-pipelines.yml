@@ -19,6 +19,5 @@ variables:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration)'
-
+    projects: '**/SimpleMauiMVVM.csproj'
+    arguments: '--configuration Release'
