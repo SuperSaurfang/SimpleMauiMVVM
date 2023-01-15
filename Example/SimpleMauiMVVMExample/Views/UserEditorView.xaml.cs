@@ -3,11 +3,13 @@ using SimpleMauiMVVMExample.ViewModels;
 
 namespace SimpleMauiMVVMExample.Views;
 
-public partial class UserEditorView : ContentView
+[Page]
+public partial class UserEditorView : ContentPage
 {
-	public UserEditorView()
+	public UserEditorView(UserEditorViewModel userEditorViewModel)
 	{
-		InitializeComponent();
+        InitializeComponent();
 
-	}
+        BindingContext = userEditorViewModel;
+    }
 }

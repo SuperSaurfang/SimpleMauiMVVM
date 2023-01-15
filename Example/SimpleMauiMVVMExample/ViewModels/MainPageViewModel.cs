@@ -11,15 +11,13 @@ namespace SimpleMauiMVVMExample.ViewModels
     {
         private int _count = 0;
         private User _user;
-        private UserEditorViewModel _editorViewModel;
 
         private readonly RelayCommand _increaseCommand;
-        public MainPageViewModel(UserEditorViewModel editorViewModel)
+        public MainPageViewModel(IReactiveMessengerService messengerService)
         {
             _increaseCommand = new RelayCommand(a => Increase());
 
-            _editorViewModel = editorViewModel;
-            _editorViewModel.User.Subscribe(user => User = user);
+            messengerService.OnData<User>().Subscribe(user => User = user);
         }
 
         public string IncreaseText 
@@ -40,11 +38,6 @@ namespace SimpleMauiMVVMExample.ViewModels
                 _user = value;
                 OnPropertyChanged();
             }
-        }
-
-        public UserEditorViewModel EditorViewModel
-        {
-            get => _editorViewModel;
         }
 
         public ICommand IncreaseCommand => _increaseCommand;

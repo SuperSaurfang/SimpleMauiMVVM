@@ -2,7 +2,6 @@
 {
     /// <summary>
     /// Base class for a viewmodel class. The base class provides the <see cref="NotifyPropertyChangedBase"/> implementation
-    /// and the <see cref="IReceiver"/> interface for the messaging system.
     /// Remember to mark the class with the <see cref="ViewModelAttribute"/>
     /// </summary>
     public abstract class ViewModelBase : NotifyPropertyChangedBase

@@ -12,6 +12,10 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+        <ShellContent
+            Title="Editor"
+            ContentTemplate="{DataTemplate views:UserEditorView}"
+            Route="UserEditor"/>
     </TabBar>
     
 

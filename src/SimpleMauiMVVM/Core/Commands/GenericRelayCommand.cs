@@ -8,20 +8,20 @@
     /// <typeparam name="T">Generic type for strong typed command parameters</typeparam>
     public class RelayCommand<T> : CommandBase
     {
-        private readonly Action<T> execute;
-        private readonly Predicate<T> canExecute;
+        private readonly Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
 
         public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
         {
-            this.execute = execute;
-            this.canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         public override bool CanExecute(object parameter)
         {
             if (parameter is T typedParameter) 
             {
-                return canExecute == null || canExecute(typedParameter);
+                return CanExecute(typedParameter);
             }
             return false;
         }
@@ -30,8 +30,18 @@
         {
             if(parameter is T typedParameter) 
             {
-                execute(typedParameter);
+                Execute(typedParameter);
             }
+        }
+
+        public bool CanExecute(T parameter)
+        {
+            return _canExecute == null || _canExecute(parameter);
+        }
+
+        public void Execute(T parameter)
+        {
+            _execute(parameter);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using SimpleMauiMVVM.Core;
 using SimpleMauiMVVM.Services.ReactiveMessenger;
 using SimpleMauiMVVMExample.Models;
-using System.Reactive.Subjects;
 
 namespace SimpleMauiMVVMExample.ViewModels
 {
@@ -12,10 +11,10 @@ namespace SimpleMauiMVVMExample.ViewModels
         private string _userName;
         private string _userEmail;
 
-        private readonly Subject<User> _userSubject;
-        public UserEditorViewModel() 
+        private readonly IReactiveMessengerService _messengerService;
+        public UserEditorViewModel(IReactiveMessengerService messengerService) 
         {
-            _userSubject = new Subject<User>();
+            _messengerService = messengerService;
         }
 
         public string UserName 
@@ -39,8 +38,6 @@ namespace SimpleMauiMVVMExample.ViewModels
             }
         }
 
-        public IObservable<User> User => _userSubject;
-
         private void PushUser()
         {
             var user = new User
@@ -49,7 +46,7 @@ namespace SimpleMauiMVVMExample.ViewModels
                 Email = _userEmail
             };
 
-            _userSubject.OnNext(user);
+            _messengerService.NextData(user);
         }
     }
 }

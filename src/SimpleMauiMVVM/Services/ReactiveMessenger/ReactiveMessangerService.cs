@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive;
-using System.Reactive.Subjects;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reactive.Subjects;
 
 namespace SimpleMauiMVVM.Services.ReactiveMessenger
 {
@@ -24,13 +17,15 @@ namespace SimpleMauiMVVM.Services.ReactiveMessenger
         public IObservable<TModel> OnData<TModel>() where TModel : new()
         {
             var scopeName = ResolveName<TModel>();
-            if (scopes.ContainsKey(scopeName))
+            if(!scopes.ContainsKey(scopeName))
             {
-                var value = scopes[scopeName];
-                if (value is Subject<TModel> subject)
-                {
-                    return subject;
-                }
+                CreateScope<TModel>();
+            }
+            
+            var value = scopes[scopeName];
+            if (value is Subject<TModel> subject)
+            {
+                return subject;
             }
 
             return null;
@@ -39,7 +34,10 @@ namespace SimpleMauiMVVM.Services.ReactiveMessenger
         public void NextData<TModel>(TModel model) where TModel : new()
         {
             var scopeName = ResolveName<TModel>();
-            if (!scopes.ContainsKey(scopeName)) return;
+            if (!scopes.ContainsKey(scopeName))
+            {
+                CreateScope<TModel>();
+            };
 
             var value = scopes[scopeName];
             if(value is Subject<TModel> subject)
@@ -62,8 +60,13 @@ namespace SimpleMauiMVVM.Services.ReactiveMessenger
         {
             var scopeName = ResolveName<TModel>();
             if (!scopes.ContainsKey(scopeName) || scopeName.Equals(nameof(Object))) return;
-
-
+            
+            var value = scopes[scopeName];
+            if(value is Subject<TModel> subject)
+            {
+                subject.OnCompleted();
+                subject.Dispose();
+            }
             scopes.Remove(scopeName);
         }
 

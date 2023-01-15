@@ -41,7 +41,6 @@
                 <Label Text="{Binding User.Gender}" Margin="10,0" />
                 <Label Text="{Binding User.Email}" Margin="10,0"  />
             </HorizontalStackLayout>
-            <views:UserEditorView BindingContext="{Binding EditorViewModel}"></views:UserEditorView>
         </VerticalStackLayout>
     </ScrollView>
  
