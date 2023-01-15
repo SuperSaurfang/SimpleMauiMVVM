@@ -12,7 +12,7 @@ pool:
 name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
 
 variables:
-  solution: '**/*.sln'
+  solution: '**/SimpleMauiMVVM.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
