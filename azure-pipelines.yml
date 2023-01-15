@@ -20,5 +20,5 @@ variables:
   inputs:
     command: 'build'
     projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration)': 'Release'
+    arguments: '--configuration $(buildConfiguration)'
 
