@@ -16,8 +16,9 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/SimpleMauiMVVM.csproj'
-    arguments: '--configuration Release'
+steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projects: '**/SimpleMauiMVVM.csproj'
+      arguments: '--configuration Release'
