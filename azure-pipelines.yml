@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-name: '1.0.$(Build.BuildId)$(Rev:.r)'
+name: '1.0.$(Build.BuildId)'
 
 variables:
   solution: '**/SimpleMauiMVVM.csproj'
@@ -17,24 +17,24 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-  - task: CmdLine@2
-    inputs:
-      script: echo '$(name)'
 
   - task: DotNetCoreCLI@2
+    displayName: 'Build Library'
     inputs:
       command: 'build'
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration)'
   
   - task: DotNetCoreCLI@2
+    displayName: 'Pack nuget'
     inputs:
       command: 'pack'
       packagesToPack: '$(solution)'
       versioningScheme: 'byBuildNumber'
   
-  - task: DownloadBuildArtifacts@1
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifacts'
     inputs:
-      buildType: 'current'
-      downloadType: 'specific'
-      downloadPath: '$(System.ArtifactsDirectory)'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'SimpleMauiMVVM'
+      publishLocation: 'Container'
