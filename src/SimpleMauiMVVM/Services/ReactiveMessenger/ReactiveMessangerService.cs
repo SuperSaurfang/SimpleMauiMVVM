@@ -23,12 +23,7 @@ namespace SimpleMauiMVVM.Services.ReactiveMessenger
             }
             
             var value = scopes[scopeName];
-            if (value is Subject<TModel> subject)
-            {
-                return subject;
-            }
-
-            return null;
+            return value as Subject<TModel>;
         }
 
         public void NextData<TModel>(TModel model) where TModel : new()
