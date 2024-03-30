@@ -1,4 +1,5 @@
-﻿using SimpleMauiMVVM.Core;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SimpleMauiMVVM.Core;
 using System.Reflection;
 
 namespace SimpleMauiMVVM.Internals
@@ -7,12 +8,12 @@ namespace SimpleMauiMVVM.Internals
     {
         public static void AddComponents(this IServiceCollection services) 
         {
-            List<Type> targetAttributes = new() 
-            {
+            List<Type> targetAttributes =
+            [
                 typeof(PageAttribute),
                 typeof(AppShellAttribute),
                 typeof(ViewModelAttribute)
-            };
+            ];
             RegisterClasses(services, targetAttributes);
         }
 
@@ -21,7 +22,7 @@ namespace SimpleMauiMVVM.Internals
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly assembly in assemblies)
             {
-                List<Type> types = assembly.GetTypes().ToList();
+                List<Type> types = [.. assembly.GetTypes()];
                 List<Type> correctTypes = types.FindAll(p => FindCorrectType(p, targetAttributes));
                 if (correctTypes.Count == 0) continue;
 
