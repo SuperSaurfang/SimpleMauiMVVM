@@ -8,7 +8,7 @@ namespace SimpleMauiMVVM.Core
     /// </summary>
     public abstract class NotifyPropertyChangedBase : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string property = "") 
         {

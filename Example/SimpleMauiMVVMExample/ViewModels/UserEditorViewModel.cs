@@ -8,8 +8,8 @@ namespace SimpleMauiMVVMExample.ViewModels
     public class UserEditorViewModel : ViewModelBase
     {
 
-        private string _userName;
-        private string _userEmail;
+        private string _userName = string.Empty;
+        private string _userEmail = string.Empty;
 
         private readonly IReactiveMessengerService _messengerService;
         public UserEditorViewModel(IReactiveMessengerService messengerService) 

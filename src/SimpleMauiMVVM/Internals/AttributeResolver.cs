@@ -22,9 +22,12 @@ namespace SimpleMauiMVVM.Internals
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly assembly in assemblies)
             {
-                List<Type> types = [.. assembly.GetTypes()];
-                List<Type> correctTypes = types.FindAll(p => FindCorrectType(p, targetAttributes));
-                if (correctTypes.Count == 0) continue;
+                var types = assembly.GetTypes();
+                var correctTypes = types.Where(p => FindCorrectType(p, targetAttributes));
+                if (!correctTypes.Any()) 
+                {
+                    continue;
+                }
 
                 foreach (Type type in correctTypes)
                 {

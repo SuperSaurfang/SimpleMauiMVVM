@@ -14,7 +14,7 @@ namespace SimpleMauiMVVM.Services.ReactiveMessenger
             };
         }
 
-        public IObservable<TModel> OnData<TModel>() where TModel : new()
+        public IObservable<TModel>? OnData<TModel>() where TModel : new()
         {
             var scopeName = ResolveName<TModel>();
             if(!scopes.ContainsKey(scopeName))

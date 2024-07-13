@@ -4,27 +4,27 @@ namespace SimpleMauiMVVM.Core.Commands
 {
     public abstract class CommandBase : ICommand
     {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
+        private readonly Action<object>? _execute;
+        private readonly Predicate<object>? _canExecute;
 
         public CommandBase() { }
 
-        public CommandBase(Action<object> execute, Predicate<object> canExecute) 
+        public CommandBase(Action<object>? execute, Predicate<object>? canExecute = null) 
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public virtual bool CanExecute(object parameter)
+        public virtual bool CanExecute(object? parameter)
         {
-            return _canExecute == null || _canExecute(parameter);
+            return _canExecute == null || _canExecute(parameter!);
         }
 
-        public virtual void Execute(object parameter)
+        public virtual void Execute(object? parameter)
         {
-            _execute(parameter);
+            _execute!(parameter!);
         }
 
         public virtual void Invalidate()
