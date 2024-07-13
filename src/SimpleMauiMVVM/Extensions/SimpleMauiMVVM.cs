@@ -1,4 +1,5 @@
-﻿using SimpleMauiMVVM.Internals;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SimpleMauiMVVM.Internals;
 using SimpleMauiMVVM.Services.ReactiveMessenger;
 
 namespace SimpleMauiMVVM.Extensions
@@ -19,7 +20,7 @@ namespace SimpleMauiMVVM.Extensions
 
         private static void ConfigureServices(IServiceCollection services) 
         {
-            services.AddSingleton<IReactiveMessengerService, ReactiveMessengerService>();
+            services.AddScoped<IReactiveMessengerService, ReactiveMessengerService>();
             
             services.AddComponents();
         }

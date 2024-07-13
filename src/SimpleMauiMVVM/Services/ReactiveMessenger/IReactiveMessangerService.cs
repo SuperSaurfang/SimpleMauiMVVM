@@ -33,7 +33,7 @@
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <returns></returns>
-        public IObservable<TModel> OnData<TModel>() where TModel : new();
+        public IObservable<TModel>? OnData<TModel>() where TModel : new();
 
     }
 }

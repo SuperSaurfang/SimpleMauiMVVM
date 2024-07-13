@@ -10,14 +10,14 @@ namespace SimpleMauiMVVMExample.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private int _count = 0;
-        private User _user;
+        private User? _user;
 
         private readonly RelayCommand _increaseCommand;
         public MainPageViewModel(IReactiveMessengerService messengerService)
         {
             _increaseCommand = new RelayCommand(a => Increase());
 
-            messengerService.OnData<User>().Subscribe(user => User = user);
+            messengerService.OnData<User>()!.Subscribe(user => User = user);
         }
 
         public string IncreaseText 
@@ -30,7 +30,7 @@ namespace SimpleMauiMVVMExample.ViewModels
             }
         }
 
-        public User User 
+        public User? User 
         {
             get => _user;
             set

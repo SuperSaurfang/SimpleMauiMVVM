@@ -5,7 +5,7 @@
     /// </summary>
     public class RelayCommand : CommandBase
     {
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null) 
+        public RelayCommand(Action<object>? execute, Predicate<object>? canExecute = null) 
             : base (execute, canExecute)
         { }
     }
